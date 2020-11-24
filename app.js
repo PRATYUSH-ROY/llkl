@@ -13,6 +13,18 @@ var imggl=null;
 var imgg2=null;
 var imgg3=null;
 var imgg4=null;
+var px=2;
+var py=40;
+
+var px1=2;
+var px4=2;
+var px2=2;
+var px3=2;
+
+var py1=40;
+var py2=40;
+var py4=40;
+var py3=40;
 
 var legs=["./hulk_legs.png","./spiderman_legs.png","ironman_legs.png"];
 
@@ -24,6 +36,51 @@ var right=["spiderman_right_hand.png","thor_right_hand.png","hulk_right_hand.png
 
 var body=["spiderman_body.png","hulkd_body.png","ironman_body.png"];
 
+function up1() {
+    if (py >= 0) {
+        py = py - 10;
+        py1 = py1 - 10;
+        py2 = py2 - 10;
+        py3 = py3 - 10;
+        py4 = py4 - 10;
+    }
+}
+
+function down1() {
+    if (py <= 500) {
+        py = py + 10;
+        py1 = py1 + 10;
+        py2 = py2 + 10;
+        py3 = py3 + 10;
+        py4 = py4 + 10;
+        
+    }
+}
+
+function left1() {
+    if (px >= 0) {
+        px = px - 5;
+        px1 = px1 - 5;
+        px2 = px2 - 5;
+        px3 = px3 - 5;
+        px4 = px4 - 5;
+        
+    }
+}
+
+function right1() {
+    if (px <= 700) {
+        px = px + 10;
+        px1 = px1 + 10;
+        px2 = px2 + 10;
+        px3 = px3 + 10;
+        px4 = px4 + 10;
+        
+    }
+}
+
+
+
 
 
 function loaded() {
@@ -34,7 +91,7 @@ function loaded() {
     cccc=document.getElementById("canvas");
     cccc.width=wid;
     cccc.height=hei;
-    px=cccc.wid/2;
+    // px=cccc.wid/2;
     can = new fabric.Canvas("canvas");
     document.body.addEventListener("keydown", function(e){
         var keycode=e.keyCode;
@@ -43,33 +100,48 @@ function loaded() {
             let randomItem = face[Math.floor(Math.random() * face.length)];
             randomItem="./static/"+randomItem
             console.log(randomItem);
-            imageg(randomItem,wid/2,40);
+            imageg(randomItem,wid/px4,py4);
         }
         if(keycode==76){
             let randomItem = legs[Math.floor(Math.random() * legs.length)];
             randomItem="./static/"+randomItem
             console.log(randomItem);
-            imagegl(randomItem,wid/2,400);
+            imagegl(randomItem,wid/px3,py3);
         }
         if(keycode==82){
             let randomItem = left[Math.floor(Math.random() * left.length)];
             randomItem="./static/"+randomItem
             console.log(randomItem);
-            imageg3(randomItem,wid/2,40);
+            imageg3(randomItem,wid/px2,py2);
         }
         if(keycode==72){
             let randomItem = right[Math.floor(Math.random() * right.length)];
             randomItem="./static/"+randomItem
             console.log(randomItem);
-            imageg2(randomItem,wid/2,40);
+            imageg2(randomItem,wid/px1,py1);
         }
         if(keycode==66){
             let randomItem = body[Math.floor(Math.random() * body.length)];
             randomItem="./static/"+randomItem
             console.log(randomItem);
-            imageg4(randomItem,wid/2,40);
+            imageg4(randomItem,wid/px,py);
         }
-
+        if (keycode == '38') {
+            up1(); 
+            e.preventDefault();
+        }
+        if (keycode == '40') {
+            down1(); 
+            e.preventDefault();
+        }
+        if (keycode == '37') {
+            left1(); 
+            e.preventDefault();
+        }
+        if (keycode == '39') {
+            right1(); 
+            e.preventDefault();
+        }
     });
 }
 function imageg(image,xx,yy) {
